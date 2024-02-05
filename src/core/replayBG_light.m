@@ -1,4 +1,4 @@
-function [cost1, cost2]=replayBG_light(modality, data, BW, scenario, saveName, varargin)
+function [GRI, BGRI, TITR, TBR, glucose]=replayBG_light(modality, data, BW, scenario, saveName, varargin)
 % function  replayBG(modality, data, BW, scenario, saveName, varargin)
 % Core function of ReplayBG. Can be used to identify ReplayBG model on the
 % given data or to "replay" specific scenarios specified by the given data.
@@ -420,8 +420,11 @@ function [cost1, cost2]=replayBG_light(modality, data, BW, scenario, saveName, v
         diary off;
     end
 
-    cost1 = 100 - analysis.median.glucose.time.timeInTightTarget;
-    cost2 = analysis.median.glucose.time.timeInL2Hypoglycemia;
+    GRI = analysis.median.glucose.risk.gri;
+    BGRI = analysis.median.glucose.risk.bgri;
+    TITR = analysis.median.glucose.time.timeInTightTarget;
+    TBR = analysis.median.glucose.time.timeInHypoglycemia;
+    glucose = glucose.median;
     %% ====================================================================
     
 end
